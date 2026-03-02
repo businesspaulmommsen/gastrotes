@@ -153,11 +153,12 @@
           <div class="contact-card">
             <div class="contact-label">Reservierung</div>
             <iframe
+              id="wc-booking-widget"
               src="https://webcontroller.webstudio-pm.de/widget/a1571e4a-e1ad-4b9f-bef1-274c05ce305a"
               width="100%"
-              height="700"
+              height="500"
               frameborder="0"
-              style="border-radius: 12px;"
+              style="border-radius: 12px; display: block;"
               title="Tisch reservieren"
             ></iframe>
           </div>
@@ -166,11 +167,12 @@
           <div class="contact-card">
             <div class="contact-label">Nachricht senden</div>
             <iframe
+              id="wc-form-widget"
               src="https://webcontroller.webstudio-pm.de/widget/a1571e4a-e1ad-4b9f-bef1-274c05ce305a/form/42f0cf2f-9838-4a51-84c4-d13e7cd30111?bg=%23ffffff&text=%231f2937&accent=%232563eb&border=rgba(0,0,0,0.1)&inputBg=rgba(0,0,0,0.05)&padding=24&radius=12"
               width="100%"
-              height="600"
+              height="500"
               frameborder="0"
-              style="border-radius: 12px;"
+              style="border-radius: 12px; display: block;"
               title="Kontaktformular"
             ></iframe>
           </div>
@@ -200,5 +202,22 @@
   </footer>
 
   <script src="script.js"></script>
+
+  <!-- ✅ Widget Höhe automatisch anpassen -->
+  <script>
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.type === 'wc-resize') {
+        var booking = document.getElementById('wc-booking-widget');
+        var form = document.getElementById('wc-form-widget');
+        if (booking && e.source === booking.contentWindow) {
+          booking.style.height = (e.data.height + 20) + 'px';
+        }
+        if (form && e.source === form.contentWindow) {
+          form.style.height = (e.data.height + 20) + 'px';
+        }
+      }
+    });
+  </script>
+
 </body>
 </html>
